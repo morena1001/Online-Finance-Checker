@@ -37,8 +37,8 @@ body {
 
 .signOutButton {
     font-size: 16px;
-    /* border: 1px solid black; */
-    border: none;
+    border: 1px solid black;
+    /* border: none; */
     border-radius: 20px;
     padding: 6px 8px;
     color: white;
@@ -50,11 +50,11 @@ body {
 .signOutButton:hover { 
     background-color: rgb(241, 173, 63);
     color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
 }
 
 .bodyContainer {
     height: 82vh;
-    /* background-color: antiquewhite; */
 }
 
 .bodyWrapper {
@@ -63,6 +63,122 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+.trackItemsContainer {
+    margin-top: 20px;
+}
+
+.limitTrackerSelector {
+    font-size: 20px;
+    font-family: inherit;
+    border: 1px solid white;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 6px 4px;
+}
+
+.limitTrackerSelector:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid black;
+}
+
+.trackerListItem {
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.limitTrackerTimePeriodHistoryButton {
+    border: 1px solid white;
+    /* border-radius: 20px; */
+    /* padding: 10px 12px; */
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+
+    margin: 0px 8px;
+}
+
+.limitTrackerTimePeriodHistoryButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid black;
+}
+
+.limitTrackerEditButton {
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.limitTrackerEditButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid black;
+}
+
+.currentPeriodLimitStatisticsContainer {
+    color: white;
+    background-color: rgba(73, 72, 70, 0.829);
+    /* border: 1px solid white; */
+    border-radius: 20px;
+    width: 18vw;
+    height: 4vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.limitText {
+    margin-right: 4px;
+}
+
+.currentPeriodPurchasesListContainer {
+
+}
+
+.currentPeriodPurchasesList {
+
+}
+
+.purchaseItem {
+
+}
+
+.dateOfPurchase {
+
+}
+
+.purchaseReason {
+
+}
+
+.moneySpendOnPurchase {
+
+}
+
+.editPurchaseItem {
+    
+}
+
+
+
+
+
 
 .footerContainer {
     background-color: rgba(73, 72, 70, 0.829);

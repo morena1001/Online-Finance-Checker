@@ -23,35 +23,36 @@ export const Home = (props) => {
             </div>
             <div className="bodyContainer">
                 <div className="bodyWrapper">
-                    <div className="TrackItemsContainer">
-                        <select name="Limit Tracker" id="LimitTrackerSelector" className="LimiTrackerSelector">
-                            <option value="Tracker1">Tracker #1</option>
+                    <div className="trackItemsContainer">
+                        <select name="Limit Tracker" id="limitTrackerSelector" className="limitTrackerSelector">
+                            <option value="Tracker1" className='trackerListItem'>Tracker #1</option>
                         </select>
                         {/* <div className="limitTrackerTimePeriodHistoryContainer"> */}
-                            <button className="limitTrackerTimePeriodHistoryButton"></button>
+                            <button className="limitTrackerTimePeriodHistoryButton"><i class="fa-solid fa-clock-rotate-left" /></button>
                         {/* </div> */}
                         {/* <div className="limitTrackerEditContainer"> */}
-                            <button className="limitTrackerEditButton"></button>
+                            <button className="limitTrackerEditButton"><i class="fa-solid fa-pencil" /></button>
                         {/* </div> */}
                     </div>
 
                     <div className="currentPeriodLimitStatisticsContainer">
                         <div className="moneyLimitContainer">
-                            <span className="limitText"></span>
-                            <span className="currentPeriodMoneyLimit"></span>
+                            <span className="limitText">Limit:</span>
+                            <span className="currentPeriodMoneyLimit">$150</span>
                         </div>
                         <div className="timeLimitContainer">
-                            <span className="limitText"></span>
-                            <span className="currentPeriodTimeLimit"></span>
+                            <span className="limitText">Period:</span>
+                            <span className="currentPeriodTimeLimit">2 weeks</span>
                         </div>
                     </div>
 
                     <div className="currentPeriodPurchasesListContainer">
                         <ul className="currentPeriodPurchasesList">
                             <li className="purchaseItem">
-                                <span className="dateOfPurchase"></span>
-                                <span className="purchaseReason"></span>
-                                <span className="moneySpendOnPurchase"></span>
+                                <span className="dateOfPurchase">5/1/24</span>
+                                <span className="purchaseReason">Pizza Hut</span>
+                                <span className="moneySpendOnPurchase">$24.50</span>
+                                <button className="editPurchaseItem"><i class="fa-solid fa-pencil" /></button>
                             </li>
                         </ul>
                     </div>
