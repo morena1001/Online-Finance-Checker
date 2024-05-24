@@ -5,4 +5,68 @@
 
 body {
     font-family: Montserrat;
+    /* margin: 0px; */
+}
+
+.headerContainer {
+    background-color: rgba(73, 72, 70, 0.829);
+    /* position: sticky; */
+    height: 8vh;
+    display: grid;
+    border-radius: 20px;
+}
+
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.siteTitle {
+    color: white;
+    font-size: 40px;
+    margin-left: 12px;
+}
+
+.signOutButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.signOutButton {
+    font-size: 16px;
+    /* border: 1px solid black; */
+    border: none;
+    border-radius: 20px;
+    padding: 6px 8px;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.signOutButton:hover { 
+    background-color: rgb(241, 173, 63);
+    color: black;
+}
+
+.bodyContainer {
+    height: 82vh;
+    /* background-color: antiquewhite; */
+}
+
+.bodyWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footerContainer {
+    background-color: rgba(73, 72, 70, 0.829);
+    /* position: sticky; */
+    height: 8vh;
+    border-radius: 20px;
 }

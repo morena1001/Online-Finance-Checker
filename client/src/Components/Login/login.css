@@ -53,7 +53,7 @@ body {
 }
 
 .inputBox::placeholder {
-    color: rgb(228, 189, 128);
+    color: rgb(241, 173, 63);
 }
 
 .errorLabel {
@@ -91,7 +91,7 @@ body {
 }
 
 .link:hover {
-    color: rgb(228, 189, 128);
+    color: rgb(241, 173, 63);
 }
 
 .inputButton {
@@ -107,6 +107,6 @@ body {
 }
 
 .inputButton:hover {
-    background-color: rgb(228, 190, 128);
+    background-color: rgb(241, 173, 63);
     color: black;
 }
