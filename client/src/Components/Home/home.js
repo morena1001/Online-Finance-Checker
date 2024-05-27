@@ -47,41 +47,47 @@ export const Home = (props) => {
                     </div>
 
                     <div className="currentPeriodPurchasesListContainer">
-                        <ul className="currentPeriodPurchasesList">
-                            <li className="purchaseItem">
-                                <span className="dateOfPurchase">5/1/24</span>
-                                <span className="purchaseReason">Pizza Hut</span>
-                                <span className="moneySpendOnPurchase">$24.50</span>
-                                <button className="editPurchaseItem"><i class="fa-solid fa-pencil" /></button>
-                            </li>
-                        </ul>
+                        <table className="currentPeriodPurchasesList">
+                            <tr className="currentPurchasesListHeader">
+                                <th className="listHeader dateOfPurchaseTitle">Date</th>
+                                <th className="listHeader purchaseReasonTitle">Reason</th>
+                                <th className="listHeader moneySpentOnPurchaseTitle">Amount</th>
+                                <th className="listHeader editPurchaseItemTitle">
+                                </th>
+                            </tr>
+                            <tr className="purchaseItem">
+                                <td className="purchaseItemCell dateOfPurchase">5/1/24</td>
+                                <td className="purchaseItemCell purchaseReason">Pizza Hut</td>
+                                <td className="purchaseItemCell moneySpentOnPurchase">$24.50</td>
+                                <td className="purchaseItemCell editPurchaseItem">
+                                    <button className="editPurchaseItemButton" title="edit">
+                                        <i class="fa-solid fa-pencil" />
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
 
                     <div className="currentPeriodStatisticsContainer">
                         <div className="totalMoneySpentContainer">
-                            <span className="totalText"></span>
-                            <span className="currentPeriodMoneySpent"></span>
+                            <span className="leftText">Total Spent:</span>
+                            <span className="currentPeriodMoneySpent">$120.33</span>
                         </div>
                         <div className="timeLeftInPeriodContainer">
-                            <span className="timeLeftText"></span>
-                            <span className="timeLeft"></span>
+                            <span className="leftText">Time Left:</span>
+                            <span className="timeLeft">2:14:5:3</span>
                         </div>
                         <div className="totalMoneyLeftContainer">
-                            <span className="totalText"></span>
-                            <span className="currentPeriodMoneyLeft"></span>
+                            <span className="leftText">Total Left:</span>
+                            <span className="currentPeriodMoneyLeft">$29.67</span>
                         </div>
                     </div>
 
                     <div className="NewPurchaseAdderContainer">
-                        <input type="text" className="itemPurchaseAmount" />
-                        <input type="text" className="itemPurchaseReason" />
+                        <input type="text" className="itemPurchaseAmount" placeholder='Purchase Amount' />
+                        <input type="text" className="itemPurchaseReason" placeholder='Purchase Reason' />
                         <button className="itemAddToListButton">Add</button>
                     </div>
-                </div>
-            </div>
-            <div className="footerContainer">
-                <div className="footerWrapper">
-
                 </div>
             </div>
         </>

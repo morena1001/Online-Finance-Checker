@@ -53,7 +53,7 @@ body {
 }
 
 .inputBox::placeholder {
-    color: rgb(241, 173, 63);
+    color: rgb(241, 173, 63, 0.75);
 }
 
 .errorLabel {

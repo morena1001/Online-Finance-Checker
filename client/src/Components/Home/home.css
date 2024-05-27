@@ -148,41 +148,146 @@ body {
 }
 
 .currentPeriodPurchasesListContainer {
+    color: white;
+    height: 65vh;
+    width: 32vw;
 
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    overflow-y: auto;
+    scrollbar-color: rgb(241, 173, 63) rgba(73, 72, 70, 0.829);
+    margin-top: 12px;
 }
 
 .currentPeriodPurchasesList {
-
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* scrollbar-width:thin;
+    scrollbar-color: rgb(241, 173, 63) rgba(73, 72, 70, 0.829);
+    overflow-y: auto;
+    height: 55.5vh; */
+    /* margin-top: 6px; */
+    /* border: 1px solid white; */
+    width: 100%;
+    text-align: center;
 }
 
-.purchaseItem {
-
+table {
+    /* border-collapse: collapse; */
 }
 
-.dateOfPurchase {
-
+th, td {
+    /* border: 1px solid white; */
 }
 
-.purchaseReason {
-
+.dateOfPurchaseTitle {
+    width: 15%;
 }
 
-.moneySpendOnPurchase {
-
+.purchaseReasonTitle {
+    width: 55%;
 }
 
-.editPurchaseItem {
-    
+.moneySpentOnPurchaseTitle {
+    width: 20%;
+}
+
+.editPurchaseItemTitle {
+    width: 10%;
 }
 
 
-
-
-
-
-.footerContainer {
+.currentPeriodStatisticsContainer {
+    color: white;
     background-color: rgba(73, 72, 70, 0.829);
-    /* position: sticky; */
-    height: 8vh;
+    /* border: 1px solid white; */
     border-radius: 20px;
+    width: 38vw;
+    height: 4vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.editPurchaseItemButton {
+    border: 1px solid white;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    font-size: 6px;
+}
+
+.editPurchaseItemButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid black;
+}
+
+.leftText {
+    margin-right: 4px;
+}
+
+.NewPurchaseAdderContainer {
+    width: 39vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.itemPurchaseAmount {
+    font-size: 20px;
+    font-family: inherit;
+    border: 1px solid white;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 6px 10px;
+    width: 12vw;
+}
+
+.itemPurchaseAmount::placeholder {
+    color: rgb(241, 173, 63, 0.75);
+}
+
+.itemPurchaseReason {
+    font-size: 20px;
+    font-family: inherit;
+    border: 1px solid white;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 6px 10px;
+    width: 18vw;
+}
+
+.itemPurchaseReason::placeholder {
+    color: rgba(241, 173, 63, 0.75);
+}
+
+.itemAddToListButton {
+    font-size: 20px;
+    font-family: inherit;
+    border: 1px solid white;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 4px;
+    width: 4vw;
+    cursor: pointer;
+}
+
+.itemAddToListButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
 }
