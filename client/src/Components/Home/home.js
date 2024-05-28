@@ -28,10 +28,10 @@ export const Home = (props) => {
                             <option value="Tracker1" className='trackerListItem'>Tracker #1</option>
                         </select>
                         {/* <div className="limitTrackerTimePeriodHistoryContainer"> */}
-                            <button className="limitTrackerTimePeriodHistoryButton"><i class="fa-solid fa-clock-rotate-left" /></button>
+                            <button className="limitTrackerTimePeriodHistoryButton"><i class="fa-solid fa-clock-rotate-left buttons" /></button>
                         {/* </div> */}
                         {/* <div className="limitTrackerEditContainer"> */}
-                            <button className="limitTrackerEditButton"><i class="fa-solid fa-pencil" /></button>
+                            <button className="limitTrackerEditButton"><i class="fa-solid fa-pencil buttons" /></button>
                         {/* </div> */}
                     </div>
 
@@ -93,32 +93,3 @@ export const Home = (props) => {
         </>
     )
 }
-
-
-{/* <div className="loginContainer">
-                <div className="loginWrapper">
-                    <div className="titleContainer">
-                        <div className="title">Login</div>
-                    </div>
-                    <div className="inputContainer">
-                        <input type="text" className="inputBox" id='username' value={username} placeholder='Enter your username here' onChange={
-                            (e) => setUsername(e.target.value)
-                        }/>
-                        <label className="errorLabel">{usernameError}</label>
-                    </div>
-                    <div className="inputContainer">
-                        <input type="text" className="inputBox" id='password' placeholder='Enter your password here' onChange={
-                            (e) => setPassword(e.target.value)
-                        } />
-                        <label className="errorLabel">{passwordError}</label>
-                    </div>
-                    <div className="registerLink">
-                        <label className="registerLabel">Don't have an account?</label>
-                        <Link className='link' to='/register'>Register</Link>
-                    </div>
-                    <div className="inputContainer">
-                        <input className="inputButton" type="button" onClick={onLoginButtonClick} value={'Log in'} />
-                        <label className="loginErrorLabel">{loginError}</label>
-                    </div>
-                </div>
-            </div> */}

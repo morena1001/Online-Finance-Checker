@@ -110,3 +110,14 @@ body {
     background-color: rgb(241, 173, 63);
     color: black;
 }
+
+@media screen and (max-width: 420px) {  
+    .inputBox {
+        width: 200px;
+        font-size: 14px;
+    }
+
+    .inputBox::placeholder {
+        font-size: 14px;
+    }
+}

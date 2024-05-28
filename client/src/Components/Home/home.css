@@ -69,7 +69,7 @@ body {
 }
 
 .limitTrackerSelector {
-    font-size: 20px;
+    font-size: 18px;
     font-family: inherit;
     border: 1px solid white;
     background: black;
@@ -77,6 +77,7 @@ body {
     border-radius: 20px;
     cursor: pointer;
     padding: 6px 4px;
+    width: 14vw;
 }
 
 .limitTrackerSelector:hover {
@@ -99,8 +100,8 @@ body {
     font: inherit;
     cursor: pointer;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    height: 39px;
+    width: 39px;
 
     margin: 0px 8px;
 }
@@ -118,8 +119,8 @@ body {
     font: inherit;
     cursor: pointer;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
+    height: 39px;
+    width: 39px;
 }
 
 .limitTrackerEditButton:hover {
@@ -158,28 +159,13 @@ body {
     overflow-y: auto;
     scrollbar-color: rgb(241, 173, 63) rgba(73, 72, 70, 0.829);
     margin-top: 12px;
+
+    font-size: 16px;
 }
 
 .currentPeriodPurchasesList {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* scrollbar-width:thin;
-    scrollbar-color: rgb(241, 173, 63) rgba(73, 72, 70, 0.829);
-    overflow-y: auto;
-    height: 55.5vh; */
-    /* margin-top: 6px; */
-    /* border: 1px solid white; */
     width: 100%;
     text-align: center;
-}
-
-table {
-    /* border-collapse: collapse; */
-}
-
-th, td {
-    /* border: 1px solid white; */
 }
 
 .dateOfPurchaseTitle {
@@ -197,7 +183,6 @@ th, td {
 .editPurchaseItemTitle {
     width: 10%;
 }
-
 
 .currentPeriodStatisticsContainer {
     color: white;
@@ -290,4 +275,208 @@ th, td {
 .itemAddToListButton:hover {
     background-color: rgb(241, 173, 63);
     color: black;
+}
+
+
+
+@media screen and (max-width: 1300px) {
+    .currentPeriodLimitStatisticsContainer {
+        width: 22vw;
+    }
+
+    .currentPeriodStatisticsContainer {
+        width: 46vw;
+    }
+
+    .NewPurchaseAdderContainer {
+        width: 42vw;
+    }
+
+    .itemPurchaseAmount {
+        width: 13vw;
+        font-size: 18px;
+    }
+
+    .itemPurchaseReason {
+        width: 19vw;
+        font-size: 18px;
+    }
+
+    .itemAddToListButton {
+        width: 5vw;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1160px) { 
+    .currentPeriodLimitStatisticsContainer {
+        width: 26vw;
+    }
+
+    .currentPeriodStatisticsContainer {
+        width: 50vw;
+    }
+
+    .NewPurchaseAdderContainer {
+        width: 46vw;
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    .NewPurchaseAdderContainer {
+        width: 48vw;
+    }
+
+    .itemPurchaseAmount {
+        width: 15vw;
+    }
+
+    .itemPurchaseReason {
+        width: 21vw;
+    }
+
+    .itemAddToListButton {
+        width: 6vw;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .limitTrackerSelector {
+        font-size: 16px;
+    }
+
+    .limitTrackerTimePeriodHistoryButton, .limitTrackerEditButton {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .currentPeriodLimitStatisticsContainer {
+        width: 28vw;
+        font-size: 16px;
+    }
+
+    .currentPeriodStatisticsContainer {
+        width: 54vw;
+        font-size: 16px;
+    }
+
+    .NewPurchaseAdderContainer {
+        width: 54vw;
+    }
+
+    .itemPurchaseAmount {
+        width: 17vw;
+        font-size: 18px;
+    }
+
+    .itemPurchaseReason {
+        width: 23vw;
+        font-size: 18px;
+    }
+
+    .itemAddToListButton {
+        width: 7vw;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 795px){
+    .limitTrackerSelector {
+        font-size: 14px;
+    }
+
+    .limitTrackerTimePeriodHistoryButton, .limitTrackerEditButton {
+        width: 34px;
+        height: 34px;
+    }
+    
+    .currentPeriodLimitStatisticsContainer {
+        width: 32vw;
+        font-size: 14px;
+    }
+
+    .currentPeriodStatisticsContainer {
+        width: 60vw;
+        font-size: 14px;
+    }
+
+    .NewPurchaseAdderContainer {
+        width: 60vw;
+    }
+
+    .itemPurchaseAmount {
+        width: 18vw;
+        font-size: 16px;
+    }
+
+    .itemPurchaseReason {
+        width: 24vw;
+        font-size: 16px;
+    }
+
+    .itemAddToListButton {
+        width: 8vw;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .limitTrackerSelector {
+        font-size: 12px;
+        width: 26vw;
+        height: 3.9vh;
+        padding: 0px;
+    }
+
+    .limitTrackerTimePeriodHistoryButton, .limitTrackerEditButton {
+        width: 32px;
+        height: 32px;
+
+        font-size: 13px;
+    }
+
+    .buttons {
+        position: relative;
+        right: 4px;
+    }
+    
+    .currentPeriodLimitStatisticsContainer {
+        width: 46vw;
+        font-size: 12px;
+    }
+
+    .currentPeriodStatisticsContainer {
+        width: 84vw;
+        font-size: 12px;
+    }
+
+    .NewPurchaseAdderContainer {
+        width: 84vw;
+    }
+
+    .itemPurchaseAmount {
+        width: 25vw;
+        font-size: 16px;
+    }
+
+    .itemPurchaseReason {
+        width: 31vw;
+        font-size: 16px;
+    }
+
+    .itemAddToListButton {
+        width: 15vw;
+        font-size: 16px;
+    }
+
+    .currentPeriodPurchasesListContainer {
+        height: 55vh;
+        width: 70vw;
+        /* height: 65vh;
+        width: 32vw; */
+    }
+
+    .currentPeriodPurchasesList {
+        font-size: 12px;
+    }
 }
