@@ -1,0 +1,239 @@
+USERS COLLECTION
+
+    /users
+        GET
+
+        All of the users' information are returned
+
+    /users/:id
+        GET
+        Params:
+            id [ id of the user ] [ string ]
+
+        The information of the specified user is returned
+
+    /users
+        POST   
+        Body: 
+            email [ email of the new user] [ string ]
+            username [ username of the new user] [ string ]
+            password [ password of the new user] [ string ]
+
+        A new user is created
+
+    /users/:id
+        PATCH
+        Params: 
+            id [ id of the user ] [ string ]
+
+        Body: 
+            email [ updated email of the user ] [ string ]  { optional }
+            username [ updated username of the user ] [ string ]  { optional }
+            password [ update password of the user ] [ string ]  { optional }
+
+        The user's information is updated
+
+    /users/:id
+        DELETE
+        Params: 
+            id [ id of the user ] [ string ]
+
+        The specified user is removed, along with all the trackers the created
+
+
+
+TRACKERS COLLECTION
+
+    /trackers
+        GET
+
+        Returns all of the trackers' information in the database
+
+    /trackers/:id
+        GET 
+        Params:
+            id [ id of the tracker ] [ string ]
+
+        Returns the information of the specified tracker
+
+    /trackers
+        POST
+        Body: 
+            period [ period of the tracker ] [ integer ]
+            startDate [ start date of the first period ] [ string in the format "MONTH-DAY-YEAR" ]
+            limit [ monetary limit of the period ] [ double ]
+            name [ name of the tracker ] [ string ]
+            userId [ id of the user that creates the tracker ] [ string ]
+            purchases [ collection to store purchase documents ] [ empty array ]
+
+        Creates a new tracker
+
+    /trackers/:id
+        PATCH
+        Params: 
+            id [ id of the tracker ] [ string ]
+
+        Body:       
+            period [ period of the tracker ] [ integer ] { optional }
+            startDate [ start date of the first period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
+            limit [ monetary limit of the period ] [ double ] { optional }
+            name [ name of the tracker ] [ string ] { optional }
+            
+        Updates the basic information of the specified tracker
+
+    /trackers/:id
+        DELETE 
+        Params: 
+            id [ id of the tracker] [ string ]
+
+        Deletes the specified tracker, along with all of the purchases stored in the tracker
+
+    /trackers/:id/purchases
+        GET
+        Params: 
+            id [ id of the tracker] [ string ]
+
+        Returns all of the purchases stored in the tracker
+
+    /trackers/:id/purchases/:id_2
+        GET
+        Params:
+            id [ id of the tracker] [ string ]
+            id_2 [ id of the individual purchase in the tracker ] [ string ]
+
+        Returns the information of the specified purchase in the tracker
+    
+    /trackers/:id/purchases
+        POST
+        Params:
+            id [ id of the tracker] [ string ]
+
+        Body: 
+            date [ date that the purchase was made] [ string in the format "MONTH-DAY-YEAR" ]
+            reason [ reason why the purchase was made] [ string ]
+            amount [ final cost of the purchase ] [ double ]
+            _id [ new id of the purchase document] [ ObjectId ]
+
+        Creates a new purchase document inside the purchases array inside the specified tracker document
+
+    /trackers/:id/purchases/:id_2
+        PATCH
+        Params:
+            id [ id of the tracker] [ string ]
+            id_2 [ id of the individual purchase in the tracker ] [ string ]
+
+        Body: 
+            date [ date that the purchase was made] [ string in the format "MONTH-DAY-YEAR" ] { optional }
+            reason [ reason why the purchase was made] [ string ] { optional }
+            amount [ final cost of the purchase ] [ double ] { optional }
+
+        Updates the basic information of the specified purchase in the specified tracker
+
+    /trackers/:id/purchases/:id_2
+        DELETE
+        Params:
+            id [ id of the tracker] [ string ]
+            id_2 [ id of the individual purchase in the tracker ] [ string ]
+
+        Deletes the specified purchase in the specified tracker
+
+
+
+PURCHASES COLLECTION
+
+    /purchases
+        GET
+
+        Returns all of the purchases' information 
+
+    /purchases/:id
+        GET
+        Params:
+            id [ id of the purchase ] [ string ]
+
+        Returns the information of the specified purchase
+
+    /purchases
+        POST
+        Body: 
+            date [ date that the purchase was made] [ string in the format "MONTH-DAY-YEAR" ]
+            reason [ reason why the purchase was made] [ string ]
+            amount [ final cost of the purchase ] [ double ]
+            userId [ id of the user that made the purchase] [ string ]
+            trackerId [ id of the tracker where the purchase was logged ] [ string ]
+
+        Creates a new purchase 
+
+    /purchases/:id
+        PATCH
+        Params:
+            id [ id of the purchase ] [ string ]
+
+        Body: 
+            date [ date that the purchase was made] [ string in the format "MONTH-DAY-YEAR" ] { optional }
+            reason [ reason why the purchase was made] [ string ] { optional }
+            amount [ final cost of the purchase ] [ double ] { optional }
+
+        Updates the basic information of the specified purchase
+
+    /purchases/:id 
+        DELETE
+        Params: 
+            id [ id of the purchase ] [ string ]
+
+        Deletes the specified purchase
+
+    
+
+TRACKERHISTORIES COLLECTION
+
+    /trackerHistories
+        GET
+
+        Returns all of the tracker histories in the database
+
+    /trackerHistories/:id
+        GET
+        Params: 
+            id [ id of the tracker history ]
+
+        Returns the information of the specified tracker history
+
+    /trackerHistories
+        POST
+        Body : 
+            period [ period of the tracker ] [ integer ]
+            startDate [ start date of the period ] [ string in the format "MONTH-DAY-YEAR" ]
+            endDate [ end date of the period ] [ string in the format "MONTH-DAY-YEAR" ]
+            limit [ monetary limit of the period ] [ double ]
+            moneySpent [ total amount of money spent in the period ] [ double]
+            moneyLeftOver [ total amount of money left over from not reaching limit ] [ double ]
+            overdraftOccurred [ is true if overdraft occured in the period ] [ boolean ]
+            overdraftVoided [ is true if the overdraft was voided ] [ boolean ] ( if (overdraftOccurred and !overdraftVoided) then overdraft was transfered to next period )
+            trackerId [ id of the tracker ] [ string ]
+
+        Creates a new tracker history of the recently finished period
+
+    /trackerHistories/:id
+        PATCH
+        Params: 
+            id [ id of the tracker history ]
+
+        Body: 
+            period [ period of the tracker ] [ integer ] { optional }
+            startDate [ start date of the period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
+            endDate [ end date of the period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
+            limit [ monetary limit of the period ] [ double ] { optional }
+            moneySpent [ total amount of money spent in the period ] [ double] { optional }
+            moneyLeftOver [ total amount of money left over from not reaching limit ] [ double ] { optional }
+            overdraftOccurred [ is true if overdraft occured in the period ] [ boolean ] { optional }
+            overdraftVoided [ is true if the overdraft was voided ] [ boolean ] ( if (overdraftOccurred and !overdraftVoided) then overdraft was transfered to next period ) { optional }
+
+        Updates the specified tracker history
+
+    /trackerHistories/:id
+        DELETE
+        Params:
+            id [ id of the tracker history ]
+
+        Deletes the specified tracker history
