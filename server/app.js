@@ -128,9 +128,10 @@ app.get('/trackers/:id', (req, res) => {
 
 app.post('/trackers', (req, res) => {
     const tracker = req.body
-    // tracker.purchases = db.createCollection('purchases')
 
     if (ObjectId.isValid(tracker.userId)) {
+        tracker.userId = new ObjectId(tracker.userId)
+
         db.collection('trackers')
         .insertOne(tracker)
         .then(result => {
@@ -315,3 +316,182 @@ app.all('/updateTrackerPurchases/:id', (req, res) => {
         res.status(500).json({ error: 'Not a valid document id' })
     }
 })
+
+
+
+// PURCHASES COLLECTION ROUTES
+app.get('/purchases', (req, res) => {
+    let purchases = []
+
+    db.collection('purchases')
+    .find()
+    .forEach(purchase => { purchases.push(purchase) })
+    .then(() => {
+        res.status(200).json(purchases)
+    })
+    .catch(() => {
+        res.status(500).json({ error: 'Could not fetch purchases' })
+    })
+})
+
+app.get('/purchases/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('purchases')
+        .findOne({ _id: new ObjectId(req.params.id) })
+        .then((purchase) => {
+            res.status(200).json(purchase)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Not a valid document id' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.post('/purchases', (req, res) => {
+    const purchase = req.body
+
+    if (ObjectId.isValid(purchase.userId) && ObjectId.isValid(purchase.trackerId)) {
+        purchase.userId = new ObjectId(purchase.userId)
+        purchase.trackerId = new ObjectId(purchase.trackerId)
+
+        db.collection('purchases')
+        .insertOne(purchase)
+        .then(result => {
+            res.status(201).json(result)
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.patch('/purchases/:id', (req, res) => {
+    const updates = req.body
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('purchases')
+        .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not update the document' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.delete('/purchases/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('purchases')
+        .deleteOne({ _id: new ObjectId(req.params.id) })
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not delete the document' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+
+
+// TRACKERHISTORIES COLLECTION ROUTES
+app.get('/trackerHistories', (req, res) => {
+    let trackerHistories = []
+
+    db.collection('trackerHistories')
+    .find()
+    .forEach(trackerHistory => { trackerHistories.push(trackerHistory) })
+    .then(() => {
+        res.status(200).json(trackerHistories)
+    })
+    .catch(() => {
+        res.status(500).json({ error: 'Could not fetch trackerHistories'})
+    })
+})
+
+app.get('/trackerHistories/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('trackerHistories')
+        .findOne({ _id: new ObjectId(req.params.id) })
+        .then((trackerHistory) => {
+            res.status(200).json(trackerHistory)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Not a valid document id' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.post('/trackerHistories', (req, res) => {
+    const trackerHistory = req.body
+
+    if (ObjectId.isValid(trackerHistory.trackerId)) {
+        trackerHistory.trackerId = new ObjectId(trackerHistory.trackerId)
+
+        db.collection('trackerHistories')
+        .insertOne(trackerHistory)
+        .then(result => {
+            res.status(201).json(result)
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.patch('/trackerHistories/:id', (req, res) => {
+    const updates = req.body 
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('trackerHistories')
+        .updateOne({ _id: new ObjectId(req.params.id) }, { $set: updates })
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not update the document' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.delete('/trackerHistories/:id', (req, res) => {
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('trackerHistories')
+        .deleteOne({ _id: new ObjectId(req.params.id) })
+        .then(result => {
+            res.status(200).json(result)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not delete the document' })
+        })
+    } else {
+        res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+
+// app.delete('/purchases/:id', (req, res) => {
+//     if (ObjectId.isValid(req.params.id)) {
+//         db.collection('purchases')
+//         .deleteOne({ _id: new ObjectId(req.params.id) })
+//         .then(result => {
+//             res.status(200).json(result)
+//         })
+//         .catch(() => {
+//             res.status(500).json({ error: 'Could not delete the document' })
+//         })
+//     } else {
+//         res.status(500).json({ error: 'Not a valid document id' })
+//     }
+// })
+
+
