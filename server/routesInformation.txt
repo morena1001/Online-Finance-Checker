@@ -59,7 +59,7 @@ TRACKERS COLLECTION
     /trackers
         POST
         Body: 
-            period [ period of the tracker ] [ integer ]
+            period [ period in days of the tracker ] [ integer ]
             startDate [ start date of the first period ] [ string in the format "MONTH-DAY-YEAR" ]
             limit [ monetary limit of the period ] [ double ]
             name [ name of the tracker ] [ string ]
@@ -74,7 +74,7 @@ TRACKERS COLLECTION
             id [ id of the tracker ] [ string ]
 
         Body:       
-            period [ period of the tracker ] [ integer ] { optional }
+            period [ period in days of the tracker ] [ integer ] { optional }
             startDate [ start date of the first period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
             limit [ monetary limit of the period ] [ double ] { optional }
             name [ name of the tracker ] [ string ] { optional }
@@ -112,7 +112,7 @@ TRACKERS COLLECTION
             date [ date that the purchase was made] [ string in the format "MONTH-DAY-YEAR" ]
             reason [ reason why the purchase was made] [ string ]
             amount [ final cost of the purchase ] [ double ]
-            _id [ new id of the purchase document] [ ObjectId ]
+            _id [ new id of the purchase document] [ ObjectId ] { CREATED IN ROUTE }
 
         Creates a new purchase document inside the purchases array inside the specified tracker document
 
@@ -136,6 +136,16 @@ TRACKERS COLLECTION
             id_2 [ id of the individual purchase in the tracker ] [ string ]
 
         Deletes the specified purchase in the specified tracker
+
+    /updateTrackerPurchases/:id { ONLY TO BE USED BY OTHER ROUTES }
+        All
+        Params:
+            id [ id of the tracker ] [ string ]
+
+        Body:
+            purchases [ collection to store purchase documents ] [ array ]
+
+        Updates the purchases array of the specified tracker
 
 
 
@@ -202,7 +212,7 @@ TRACKERHISTORIES COLLECTION
     /trackerHistories
         POST
         Body : 
-            period [ period of the tracker ] [ integer ]
+            period [ period in days of the tracker ] [ integer ]
             startDate [ start date of the period ] [ string in the format "MONTH-DAY-YEAR" ]
             endDate [ end date of the period ] [ string in the format "MONTH-DAY-YEAR" ]
             limit [ monetary limit of the period ] [ double ]
@@ -220,7 +230,7 @@ TRACKERHISTORIES COLLECTION
             id [ id of the tracker history ]
 
         Body: 
-            period [ period of the tracker ] [ integer ] { optional }
+            period [ period in days of the tracker ] [ integer ] { optional }
             startDate [ start date of the period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
             endDate [ end date of the period ] [ string in the format "MONTH-DAY-YEAR" ] { optional }
             limit [ monetary limit of the period ] [ double ] { optional }
