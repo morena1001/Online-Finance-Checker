@@ -1,10 +1,13 @@
 const express = require('express')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const { ObjectId } = require('mongodb')
 const { connectToDb, getDb } = require('./db')
 
 // init app and middleware
 const app = express()
 app.use(express.json())
+const jwtSecretKey = "abcdefghijklmnopqrstuvwxyz1234567890"
 
 // db connection
 let db
@@ -15,6 +18,59 @@ connectToDb((err) => {
         })
         db = getDb()
     }
+})
+
+
+
+// USER AUTHENTICATION ROUTES
+app.post('/auth', (req, res) => {
+    const { username, password } = req.body
+    db.collection('users')
+    .findOne({ username })
+    .then((user) => {
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (!result) {
+                return res.status(401).json({ error: 'Invalid password' })
+            } else {
+                let loginData = {
+                    username,
+                    signInTime: Date.now()
+                }
+    
+                const token = jwt.sign(loginData, jwtSecretKey)
+                res.status(200).json({ message: 'success', token })
+            }
+        })
+    })
+    .catch(() => {
+        res.status(500).json({ error: 'Could not fetch the user' })
+    })
+})
+
+app.post('/verify', (req, res) => {
+    const tokenHeaderKey = 'jwt-token'
+    const authToken = req.headers[tokenHeaderKey]
+    try {
+        const verified = jwt.verify(authToken, jwtSecretKey)
+        if (verified) {
+            res.status(200).json({ status: 'logged in', message: 'success' })
+        } else {
+            res.status(401).json({ status: 'Invalid authentication', message: 'error' })
+        }
+    } catch (error) {
+        res.status(401).json({ status: 'Invalid authentication', message: 'error' })    
+    }
+})
+
+app.post('/checkAccount', (req, res) => {
+    const { username } = req.body
+    db.collection('users')
+    .findOne({ username })
+    .then((user) => {
+        res.status(200).json({
+            status: user ? 'User exists' : 'User does not exist',  
+        })
+    })
 })
 
 
@@ -51,11 +107,20 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const user = req.body
+    bcrypt.hash(user.password, 10, (error, hash) => {
+        user.password = hash
+    })
 
     db.collection('users')
     .insertOne(user)
     .then(result => {
-        res.status(201).json(result)
+        let loginData = {
+            username: user.username,
+            signInTime: Date.now()
+        }
+
+        const token = jwt.sign(loginData, jwtSecretKey)
+        res.status(201).json({ result, message: 'success', token })
     })
     .catch(err => {
         res.status(500).json({ error: 'Could not create a new document' })
