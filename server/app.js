@@ -38,7 +38,7 @@ app.post('/auth', (req, res) => {
                 }
     
                 const token = jwt.sign(loginData, jwtSecretKey)
-                res.status(200).json({ message: 'success', token })
+                res.status(200).json({ message: 'success', token, userId: user._id })
             }
         })
     })
@@ -50,10 +50,17 @@ app.post('/auth', (req, res) => {
 app.post('/verify', (req, res) => {
     const tokenHeaderKey = 'jwt-token'
     const authToken = req.headers[tokenHeaderKey]
+    const { username } = req.body
+
     try {
         const verified = jwt.verify(authToken, jwtSecretKey)
         if (verified) {
-            res.status(200).json({ status: 'logged in', message: 'success' })
+            db.collection('users')
+            .findOne({ username })
+            .then((user) => {
+                res.status(200).json({ status: 'logged in', message: 'success', user })
+            })
+            
         } else {
             res.status(401).json({ status: 'Invalid authentication', message: 'error' })
         }

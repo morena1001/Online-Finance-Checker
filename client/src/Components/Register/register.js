@@ -43,7 +43,39 @@ export const Register = (props) => {
         }
 
         if (!emailErrorCheck && !usernameErrorCheck && !passwordErrorCheck ) {
-            console.log("YAY")
+            fetch('/checkAccount', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ username })
+            })
+            .then(r => r.json())
+            .then(r => {
+                if (r.status === 'User does not exist') {
+                    fetch('/users', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, username, password })
+                    })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.message === 'success') {
+                            localStorage.setItem('user', JSON.stringify({ email, token: r.token,userId: r.result.insertedId.toString() }))
+                            props.setUsername(username)
+                            props.setLoggedIn(true)
+                            props.setUserId(r.result.insertedId.toString())
+                            navigate('/home', props)
+                        } else {
+                            setRegisterError('Error occurred. Try again')
+                        }
+                    })
+                } else {
+                    setRegisterError('Account does not exist. Try again')
+                }
+            })
         }
     }
 

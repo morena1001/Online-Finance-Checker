@@ -4,20 +4,36 @@ import { useNavigate, Link } from 'react-router-dom'
 import './home.css'
 
 export const Home = (props) => {
-
     const navigate = useNavigate()
 
     const onSignOutButtonClick = () => {
         navigate('/login')
     }
 
+    const onProfileButtonClick = () => {
+        navigate('/profile/' + props.userId, props)
+    }
+
+    useEffect(() => {
+        if (!props.loggedIn) {
+            navigate('/login')
+        }
+    })
+
     return (
         <>
             <div className="headerContainer">
                 <div className="headerWrapper">
                     <div className="siteTitle">OFC</div>
-                    <div className="signOutButtonContainer">
-                        <button className="signOutButton" onClick={onSignOutButtonClick}>Sign out</button>
+                    <div className="headerButtons">
+                        <div className="profileButtonContainer">
+                            <button className="profileButton" onClick={onProfileButtonClick}>
+                                <i class="fa-solid fa-user"></i>
+                            </button>
+                        </div>
+                        <div className="signOutButtonContainer">
+                            <button className="signOutButton" onClick={onSignOutButtonClick}>Sign out</button>
+                        </div>
                     </div>
                 </div>
             </div>

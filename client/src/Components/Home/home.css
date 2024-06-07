@@ -28,6 +28,35 @@ body {
     margin-left: 12px;
 }
 
+.headerButtons {
+    display: flex;
+}
+
+.profileButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.profileButton {
+    font-size: 16px;
+    border: 1px solid black;
+    /* border: none; */
+    border-radius: 20px;
+    padding: 6px 8px;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.profileButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
+
 .signOutButtonContainer {
     display: flex;
     justify-content: center;

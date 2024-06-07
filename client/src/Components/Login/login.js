@@ -42,12 +42,47 @@ export const Login = (props) => {
         }
 
         if (!usernameErrorCheck && !passwordErrorCheck) {
-            console.log("YAY")
+            fetch('/checkAccount', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ username })
+            })
+            .then(r => r.json())
+            .then(r => {
+                if (r.status === 'User exists') {
+                    fetch('/auth', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username, password })
+                    })
+                    .then(r => r.json())
+                    .then(r => {
+                        if (r.message === 'success') {
+                            localStorage.setItem('user', JSON.stringify({ username, token: r.token, userId: r.userId }))
+                            props.setUsername(username)
+                            props.setLoggedIn(true)
+                            props.setUserId(r.userId)
+                            props.setCheckLogIn(false)
+                            navigate('/home', props)
+                        } else {
+                            setLoginError('Password is incorrect. Try again')
+                        }
+                    })
+                } else {
+                    setLoginError('Account does not exist. Try again')
+                }
+            })
         }
     }
 
     useEffect(() => {
-        
+        if (props.loggedIn) {
+            navigate('/home', props)
+        }
     })
 
     return (

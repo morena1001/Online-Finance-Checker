@@ -1,0 +1,245 @@
+@font-face {
+    font-family: "Montserrat";
+    src: local("Montserrat-Regular"), url("../../fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: Montserrat;
+    background-color: black;
+}
+
+.profileContainer {
+    display: flex;
+    justify-content: center;    
+    /* align-items: center; */
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 60px;
+}
+
+.profileWrapper {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 18px 60px;
+}
+
+.username {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.email {
+    color: white;
+    font-size: 18px;
+    margin: 4px 0px 6px;
+}
+
+.currentTrackersContainer {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin: 4px 0px;
+}
+
+.currentTrackersSpan {
+
+}
+
+.currentTrackersCount {
+
+}
+
+.totalMoneySpentInTrackersContainer {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin: 4px 0px;
+}
+
+.totalMoneySpentInTrackersSpan {
+
+}
+
+.totalMoneySpentInTrackersCount {
+
+}
+
+.totalMoneySavedInTrackersContainer {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin: 4px 0px;
+}
+
+.totalMoneySavedInTrackersSpan {
+
+}
+
+.totalMoneySavedInTrackersCount {
+
+}
+
+.editMode {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    display: none;
+}
+
+.editSpan {
+    color: white;
+}
+
+.editInputBox {
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 20px;
+    font-family: inherit;
+    padding: 6px 12px;
+    font-size: 16px;
+    width: 200px;
+    color: white;
+    margin: 3px 0px 6px;
+}
+
+.editInputBox::placeholder {
+    font-size: 14px;
+    color: rgb(241, 173, 63, 0.75);
+}
+
+.optionButtonsContainer {
+    /* position: absolute; */
+    /* right: 20px; */
+    margin-top: 10px;
+}
+
+.optionButtonsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+    background-color: rgba(73, 72, 70, 0.829);
+    border-radius: 20px;
+    margin-left: 16px;
+    padding: 6px 0px;
+    height: 77px;
+    width: 40px;
+}
+
+.editAccountButton {
+    font-size: 16px;
+    border: 1px solid black;
+    /* border-radius: 20px;
+    padding: 6px 8px; */
+    border-radius: 50%;
+    height: 33px;
+    width: 33.5px; 
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.editAccountButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
+
+.deleteAccountButton {
+    font-size: 16px;
+    border: 1px solid black;
+    /* border-radius: 20px;
+    padding: 6px 8px; */
+    border-radius: 50%;
+    height: 33px;
+    width: 33.5px; 
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.deleteAccountButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
+
+#editIcon {
+    display: inline;
+}
+
+#cancelIcon {
+    display: none
+}
+
+#trashIcon {
+    display: inline;
+}
+
+#checkIcon {
+    display: none;
+}
+
+.askForPasswordContainer {
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    color: white;
+    margin-top: 20px;
+    display: none;
+}
+
+.askForPasswordWrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 18px 43px;
+}
+
+.askForPasswordSpan {
+
+}
+
+.previousPassword {
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 20px;
+    font-family: inherit;
+    padding: 6px 12px;
+    font-size: 16px;
+    width: 200px;
+    color: white;
+    margin: 3px 0px 6px;
+}
+
+.previousPassword::placeholder {
+    font-size: 14px;
+    color: rgb(241, 173, 63, 0.75);
+}
+
+.enterPreviousPassword {
+    align-self: center;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 20px;
+    width: 70px;
+    padding: 6px 8px;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.enterPreviousPassword:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
