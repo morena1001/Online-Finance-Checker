@@ -14,9 +14,17 @@ export const Home = (props) => {
         navigate('/profile/' + props.userId, props)
     }
 
+    const onNewTrackerButtonClick = () => {
+        navigate('/tracker', props)
+    }
+
+    const onLimitTrackerEditButtonClick = () => {
+        navigate('/tracker/1', props) // UPDATE THIS
+    }
+
     useEffect(() => {
         if (!props.loggedIn) {
-            navigate('/login')
+            navigate('/login', props)
         }
     })
 
@@ -30,6 +38,9 @@ export const Home = (props) => {
                             <button className="profileButton" onClick={onProfileButtonClick}>
                                 <i class="fa-solid fa-user"></i>
                             </button>
+                        </div>
+                        <div className="newTrackerButtonContainer">
+                            <button className="newTrackerButton" onClick={onNewTrackerButtonClick}>New Tracker</button>
                         </div>
                         <div className="signOutButtonContainer">
                             <button className="signOutButton" onClick={onSignOutButtonClick}>Sign out</button>
@@ -47,7 +58,7 @@ export const Home = (props) => {
                             <button className="limitTrackerTimePeriodHistoryButton"><i class="fa-solid fa-clock-rotate-left buttons" /></button>
                         {/* </div> */}
                         {/* <div className="limitTrackerEditContainer"> */}
-                            <button className="limitTrackerEditButton"><i class="fa-solid fa-pencil buttons" /></button>
+                            <button className="limitTrackerEditButton" onClick={ onLimitTrackerEditButtonClick }><i class="fa-solid fa-pencil buttons" /></button>
                         {/* </div> */}
                     </div>
 

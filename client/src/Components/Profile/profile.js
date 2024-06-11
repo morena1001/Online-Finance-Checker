@@ -68,6 +68,10 @@ export const Profile = (props) => {
         // console.log(deleteMode + " " + editMode)
     }
 
+    const onHomeButton = () => {
+        navigate('/home', props)
+    }
+
     return (
         <>
             <div className='profileContainer'>
@@ -106,6 +110,9 @@ export const Profile = (props) => {
                         <button className='deleteAccountButton' id='deleteAccountButton' onClick={ onDeleteAccountButton }>
                             <i class='fa-solid fa-trash' id='trashIcon'/>
                             <i class='fa-solid fa-check' id='checkIcon'/>
+                        </button>
+                        <button className="homeButton" id='homeButton' onClick={ onHomeButton }>
+                            <i class="fa-solid fa-house"></i>
                         </button>
                     </div>
                 </div>

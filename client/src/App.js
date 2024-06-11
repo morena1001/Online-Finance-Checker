@@ -6,6 +6,7 @@ import { Home } from './Components/Home/home'
 import { Login } from './Components/Login/login'
 import { Register } from './Components/Register/register'
 import { Profile } from './Components/Profile/profile'
+import { Tracker } from './Components/Tracker/tracker'
 
 import './App.css'
 
@@ -85,7 +86,24 @@ function App() {
             setUserId = { setUserId }
             /> } 
           />
-          {/* <Route path='/tracker/:id' element={ <Tracker/> } /> */}
+          <Route path='/tracker' element={ <Tracker
+            username = { username } 
+            setUsername = { setUsername } 
+            loggedIn = { loggedIn } 
+            setLoggedIn = { setLoggedIn }
+            userId = { userId }
+            setUserId = { setUserId }
+            /> } 
+          />
+          <Route path='/tracker/:id' element={ <Tracker
+            username = { username } 
+            setUsername = { setUsername } 
+            loggedIn = { loggedIn } 
+            setLoggedIn = { setLoggedIn }
+            userId = { userId }
+            setUserId = { setUserId }
+            /> } 
+          />
           {/* <Route path='/trackerHistory/:id' element={ <TrackerHistory/> } /> */}
         </Routes>
       </Router>
