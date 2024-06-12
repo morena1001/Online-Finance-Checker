@@ -5,6 +5,10 @@ import './home.css'
 
 export const Home = (props) => {
     const navigate = useNavigate()
+    const [ editMode, setEditMode ] = useState(false)
+    const [ deleteMode, setDeleteMode ] = useState(false)
+    const [ purchaseIdInEditMode, setPurchaseIdInEditMode] = useState('')
+    const [ purchaseIdInDeleteMode, setPurchaseIdInDeleteMode] = useState('')
 
     const onSignOutButtonClick = () => {
         navigate('/login')
@@ -20,6 +24,120 @@ export const Home = (props) => {
 
     const onLimitTrackerEditButtonClick = () => {
         navigate('/tracker/1', props) // UPDATE THIS
+    }
+    
+    const onEditPurchaseButtonClick = (item) => {
+        if (item.target.id !== 'editPurchaseItemButton') {
+            item.target = item.target.parentElement
+        }
+
+        if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
+            item.target.querySelector('#pencilIcon').style.display = 'inline'
+            item.target.querySelector('#cancelIcon').style.display = 'none'
+
+            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+            setPurchaseIdInDeleteMode('')
+            setDeleteMode(false)
+            return
+        } else if (deleteMode) {
+            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
+
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+            setPurchaseIdInDeleteMode('')
+            setDeleteMode(false)
+        }
+
+        if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
+            console.log("DONE WITH EDIT")
+
+            item.target.querySelector('#pencilIcon').style.display = 'inline'
+            item.target.querySelector('#checkIcon').style.display = 'none'
+
+            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            setPurchaseIdInEditMode('')
+            setEditMode(false)
+            return
+        } else if (editMode) {
+            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItem').querySelector('#trashIcon').style.display = 'inline'
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+        }
+
+        item.target.querySelector('#pencilIcon').style.display = 'none'
+        item.target.querySelector('#checkIcon').style.display = 'inline'
+
+        item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'none'
+        item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+
+        setPurchaseIdInEditMode(item.target.parentElement.parentElement.id)
+        setEditMode(true);
+    }
+
+    const onDeletePurchaseButtonClick = (item) => {
+        if (item.target.id !== 'deletePurchaseItemButton') {
+            item.target = item.target.parentElement
+        }
+
+        if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
+            item.target.querySelector('#trashIcon').style.display = 'inline'
+            item.target.querySelector('#cancelIcon').style.display = 'none'
+
+            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+            setPurchaseIdInEditMode('')
+            setEditMode(false)
+            return
+        } else if (editMode) {
+            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+            setPurchaseIdInEditMode('')
+            setEditMode(false)
+        }
+
+        if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
+            console.log("DONE WITH DELETION")
+
+            item.target.querySelector('#trashIcon').style.display = 'inline'
+            item.target.querySelector('#checkIcon').style.display = 'none'
+
+            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            setPurchaseIdInDeleteMode('')
+            setDeleteMode(false)
+            return
+        } else if (deleteMode) {
+            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
+            
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+        }
+
+        item.target.querySelector('#trashIcon').style.display = 'none'
+        item.target.querySelector('#checkIcon').style.display = 'inline'
+
+        item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'none'
+        item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+
+        setPurchaseIdInDeleteMode(item.target.parentElement.parentElement.id)
+        setDeleteMode(true);
     }
 
     useEffect(() => {
@@ -73,22 +191,62 @@ export const Home = (props) => {
                         </div>
                     </div>
 
-                    <div className="currentPeriodPurchasesListContainer">
+                    <div className="currentPeriodPurchasesListContainer" id='currentPeriodPurchasesListContainer'>
                         <table className="currentPeriodPurchasesList">
                             <tr className="currentPurchasesListHeader">
                                 <th className="listHeader dateOfPurchaseTitle">Date</th>
                                 <th className="listHeader purchaseReasonTitle">Reason</th>
                                 <th className="listHeader moneySpentOnPurchaseTitle">Amount</th>
-                                <th className="listHeader editPurchaseItemTitle">
-                                </th>
+                                {/* <th className="listHeader editPurchaseItemTitle">
+                                </th> */}
                             </tr>
-                            <tr className="purchaseItem">
+                            <tr className="purchaseItem" id='item1'>
                                 <td className="purchaseItemCell dateOfPurchase">5/1/24</td>
-                                <td className="purchaseItemCell purchaseReason">Pizza Hut</td>
-                                <td className="purchaseItemCell moneySpentOnPurchase">$24.50</td>
-                                <td className="purchaseItemCell editPurchaseItem">
-                                    <button className="editPurchaseItemButton" title="edit">
-                                        <i class="fa-solid fa-pencil" />
+                                <td className="purchaseItemCell purchaseReason purchaseViewMode">Pizza Hut</td>
+                                <td className="purchaseItemCell moneySpentOnPurchase purchaseViewMode">$24.50</td>
+                                <td className="purchaseItemCell purchaseReason purchaseEditMode">
+                                    <input type="text" className="editInput"  value={'Pizza Hut'} />
+                                </td>
+                                <td className="purchaseItemCell moneySpentOnPurchase purchaseEditMode">
+                                    <input type="text" className="editInput" value={'$24.50'} />
+                                </td>
+                                <td className="purchaseItemCell editPurchaseItem" id='editPurchaseItem'>
+                                    <button className="editPurchaseItemButton" id='editPurchaseItemButton' title="edit" onClick={ onEditPurchaseButtonClick }>
+                                        <i class="fa-solid fa-pencil" id='pencilIcon' />
+                                        <i class='fa-solid fa-check' id='checkIcon'/>
+                                        <i class='fa-solid fa-xmark' id='cancelIcon'/>
+                                    </button>
+                                </td>
+                                <td className="purchaseItemCell deletePurchaseItem" id='deletePurchaseItem'>
+                                    <button className="editPurchaseItemButton" id='deletePurchaseItemButton' title=" delete" onClick={ onDeletePurchaseButtonClick }>
+                                        <i class="fa-solid fa-trash" id='trashIcon' />
+                                        <i class='fa-solid fa-check' id='checkIcon'/>
+                                        <i class='fa-solid fa-xmark' id='cancelIcon'/>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr className="purchaseItem" id='item2'>
+                                <td className="purchaseItemCell dateOfPurchase">5/1/24</td>
+                                <td className="purchaseItemCell purchaseReason purchaseViewMode">Pizza Hut</td>
+                                <td className="purchaseItemCell moneySpentOnPurchase purchaseViewMode">$24.50</td>
+                                <td className="purchaseItemCell purchaseReason purchaseEditMode">
+                                    <input type="text" className="editInput"  value={'Pizza Hut'} />
+                                </td>
+                                <td className="purchaseItemCell moneySpentOnPurchase purchaseEditMode">
+                                    <input type="text" className="editInput" value={'$24.50'} />
+                                </td>
+                                <td className="purchaseItemCell editPurchaseItem" id='editPurchaseItem'>
+                                    <button className="editPurchaseItemButton" id='editPurchaseItemButton' title="edit" onClick={ onEditPurchaseButtonClick }>
+                                        <i class="fa-solid fa-pencil" id='pencilIcon' />
+                                        <i class='fa-solid fa-check' id='checkIcon'/>
+                                        <i class='fa-solid fa-xmark' id='cancelIcon'/>
+                                    </button>
+                                </td>
+                                <td className="purchaseItemCell deletePurchaseItem" id='deletePurchaseItem'>
+                                    <button className="editPurchaseItemButton" id='deletePurchaseItemButton' title=" delete" onClick={ onDeletePurchaseButtonClick }>
+                                        <i class="fa-solid fa-trash" id='trashIcon' />
+                                        <i class='fa-solid fa-check' id='checkIcon'/>
+                                        <i class='fa-solid fa-xmark' id='cancelIcon'/>
                                     </button>
                                 </td>
                             </tr>

@@ -235,7 +235,11 @@ body {
 }
 
 .editPurchaseItemTitle {
-    width: 10%;
+    width: 5%;
+}
+
+.deletePurchaseItem {
+    width: 5%;
 }
 
 .currentPeriodStatisticsContainer {
@@ -330,6 +334,51 @@ body {
     background-color: rgb(241, 173, 63);
     color: black;
 }
+
+#pencilIcon {
+    display: inline;
+}
+
+#cancelIcon {
+    display: none
+}
+
+#trashIcon {
+    display: inline;
+}
+
+#checkIcon {
+    display: none;
+}
+
+.editInput {
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 20px;
+    font-family: inherit;
+    padding: 4px 6px;
+    font-size: 12px;
+    width: 80px;
+    color: white;
+    /* margin: 3px 0px 6px; */
+}
+
+.editInput::placeholder {
+    font-size: 14px;
+    color: rgb(241, 173, 63, 0.75);
+}
+
+.purchaseEditMode {
+    display: none;
+}
+
+.purchaseViewMode {
+
+}
+
+
+
+
 
 
 
