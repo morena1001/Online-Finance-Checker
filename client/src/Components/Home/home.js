@@ -22,6 +22,10 @@ export const Home = (props) => {
         navigate('/tracker', props)
     }
 
+    const onLimitTrackerTimePeriodHistoryButtonClick = () => {
+        navigate('/trackerHistory/1', props) // UPDATE THIS
+    }
+
     const onLimitTrackerEditButtonClick = () => {
         navigate('/tracker/1', props) // UPDATE THIS
     }
@@ -173,7 +177,7 @@ export const Home = (props) => {
                             <option value="Tracker1" className='trackerListItem'>Tracker #1</option>
                         </select>
                         {/* <div className="limitTrackerTimePeriodHistoryContainer"> */}
-                            <button className="limitTrackerTimePeriodHistoryButton"><i class="fa-solid fa-clock-rotate-left buttons" /></button>
+                            <button className="limitTrackerTimePeriodHistoryButton" onClick={ onLimitTrackerTimePeriodHistoryButtonClick }><i class="fa-solid fa-clock-rotate-left buttons" /></button>
                         {/* </div> */}
                         {/* <div className="limitTrackerEditContainer"> */}
                             <button className="limitTrackerEditButton" onClick={ onLimitTrackerEditButtonClick }><i class="fa-solid fa-pencil buttons" /></button>

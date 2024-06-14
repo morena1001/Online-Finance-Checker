@@ -1,0 +1,125 @@
+@font-face {
+    font-family: "Montserrat";
+    src: local("Montserrat-Regular"), url("../../fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+body {
+    font-family: Montserrat;
+    background-color: black;
+}
+
+.trackerHistoriesContainer {
+
+}
+
+.trackerHistoriesWrapper {
+
+}
+
+.trackerHistoryItemContainer {
+    display: flex;
+    justify-content: center;    
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 60px;
+}
+
+.trackerHistoryItemWrapper {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 18px 40px;
+    color: white;
+}
+
+.containerItem {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin: 4px 0px;
+}
+
+.firstContainerItem {
+    margin-top: 0px;
+}
+
+.lastContainerItem {
+    margin-bottom: 0px;
+}
+
+.spanItem {
+    font-weight: bold;
+}
+
+.optionButtonsContainer {
+    /* position: absolute; */
+    /* right: 20px; */
+    margin-top: 10px;
+}
+
+.optionButtonsWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+    background-color: rgba(73, 72, 70, 0.829);
+    border-radius: 20px;
+    margin-left: 16px;
+    padding: 6px 0px;
+    height: 77px;
+    width: 40px;
+}
+
+.deleteTrackerHistoryButton {
+    font-size: 16px;
+    border: 1px solid black;
+    /* border-radius: 20px;
+    padding: 6px 8px; */
+    border-radius: 50%;
+    height: 33px;
+    width: 33.5px; 
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.deleteTrackerHistoryButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
+
+.homeButton {
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 33px;
+    width: 33.5px;
+    color: white;
+    background-color: black;
+    font: inherit;
+    cursor: pointer;
+}
+
+.homeButton:hover {
+    background-color: rgb(241, 173, 63);
+    color: black;
+    border: 1px solid rgba(73, 72, 70, 0.829);
+}
+
+#homeIcon {
+    display: inline;
+}
+
+#cancelIcon {
+    display: none
+}
+
+#trashIcon {
+    display: inline;
+}
+
+#checkIcon {
+    display: none;
+}
