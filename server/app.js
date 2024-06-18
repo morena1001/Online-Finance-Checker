@@ -198,6 +198,26 @@ app.get('/trackers/:id', (req, res) => {
     }
 })
 
+app.get('/trackers/userSpecificTrackers/:id', (req, res) => {
+    let trackers = []
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('trackers')
+        .find()
+        .forEach(tracker => {
+            if (tracker.userId.toString() === req.params.id) {
+                trackers.push(tracker)
+            }
+        })
+        .then(() => {
+            res.status(200).json(trackers)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch users' })
+        })
+    }
+})
+
 app.post('/trackers', (req, res) => {
     const tracker = req.body
 
@@ -418,6 +438,26 @@ app.get('/purchases/:id', (req, res) => {
         })
     } else {
         res.status(500).json({ error: 'Not a valid document id' })
+    }
+})
+
+app.get('/purchase/trackerSpecificPurchases/:id', (req, res) => {
+    let purchases = []
+
+    if (ObjectId.isValid(req.params.id)) {
+        db.collection('purchases')
+        .find()
+        .forEach(purchase => {
+            if (purchase.trackerId.toString() === req.params.id) {
+                purchases.push(purchase)
+            }
+        })
+        .then(() => {
+            res.status(200).json(purchases)
+        })
+        .catch(() => {
+            res.status(500).json({ error: 'Could not fetch users' })
+        })
     }
 })
 

@@ -5,10 +5,20 @@ import './home.css'
 
 export const Home = (props) => {
     const navigate = useNavigate()
+    const [ loaded, setLoaded ] = useState(false)
     const [ editMode, setEditMode ] = useState(false)
     const [ deleteMode, setDeleteMode ] = useState(false)
     const [ purchaseIdInEditMode, setPurchaseIdInEditMode] = useState('')
     const [ purchaseIdInDeleteMode, setPurchaseIdInDeleteMode] = useState('')
+
+    var dayCount
+    var hourCount
+    var MinuteCount
+    var secondCount
+    var inEditMode = false
+    var itemInEditMode
+    var inDeleteMode = false
+    var itemInDeleteMode
 
     const onSignOutButtonClick = () => {
         navigate('/login')
@@ -30,123 +40,447 @@ export const Home = (props) => {
         navigate('/tracker/1', props) // UPDATE THIS
     }
     
+    // const onEditPurchaseButtonClick = (item) => {
+    //     if (item.target.id !== 'editPurchaseItemButton') {
+    //         item.target = item.target.parentElement
+    //     }
+
+    //     if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
+    //         item.target.querySelector('#pencilIcon').style.display = 'inline'
+    //         item.target.querySelector('#cancelIcon').style.display = 'none'
+
+    //         item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+    //         item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+    //         setPurchaseIdInDeleteMode('')
+    //         setDeleteMode(false)
+    //         return
+    //     } else if (deleteMode) {
+    //         let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
+
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+    //         setPurchaseIdInDeleteMode('')
+    //         setDeleteMode(false)
+    //     }
+
+    //     if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
+    //         console.log("DONE WITH EDIT")
+
+    //         item.target.querySelector('#pencilIcon').style.display = 'inline'
+    //         item.target.querySelector('#checkIcon').style.display = 'none'
+
+    //         item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+    //         item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+    //         setPurchaseIdInEditMode('')
+    //         setEditMode(false)
+    //         return
+    //     } else if (editMode) {
+    //         let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItem').querySelector('#trashIcon').style.display = 'inline'
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+    //     }
+
+    //     let hope = item.target.querySelector('#pencilIcon')
+    //     console.log(hope.style)
+    //     console.log(item.target.style)
+    //     console.log(document.getElementById(item.target.id).getElementsByClassName('pencilIcon')[0].style)
+
+    //     item.target.querySelector('#pencilIcon').style.display = 'none'
+    //     item.target.querySelector('#checkIcon').style.display = 'inline'
+
+    //     item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'none'
+    //     item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+
+    //     setPurchaseIdInEditMode(item.target.parentElement.parentElement.id)
+    //     setEditMode(true);
+    // }
+
+    // const onNewDeletePurchaseButtonClick = (item) => {
+    //     if (item.target.id !== 'deletePurchaseItemButton') {
+    //         item.target = item.target.parentElement
+    //     }
+
+    //     if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
+    //         item.target.querySelector('#trashIcon').style.display = 'inline'
+    //         item.target.querySelector('#cancelIcon').style.display = 'none'
+
+    //         item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+    //         setPurchaseIdInEditMode('')
+    //         setEditMode(false)
+    //         return
+    //     } else if (editMode) {
+    //         let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+    //         setPurchaseIdInEditMode('')
+    //         setEditMode(false)
+    //     }
+
+    //     if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
+    //         console.log("DONE WITH DELETION")
+
+    //         item.target.querySelector('#trashIcon').style.display = 'inline'
+    //         item.target.querySelector('#checkIcon').style.display = 'none'
+
+    //         item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+    //         setPurchaseIdInDeleteMode('')
+    //         setDeleteMode(false)
+    //         return
+    //     } else if (deleteMode) {
+    //         let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
+            
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
+    //         previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
+    //         previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+    //     }
+
+    //     item.target.querySelector('#trashIcon').style.display = 'none'
+    //     item.target.querySelector('#checkIcon').style.display = 'inline'
+
+    //     item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'none'
+    //     item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+
+    //     setPurchaseIdInDeleteMode(item.target.parentElement.parentElement.id)
+    //     setDeleteMode(true);
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const onEditPurchaseButtonClick = (item) => {
         if (item.target.id !== 'editPurchaseItemButton') {
-            item.target = item.target.parentElement
+            item = item.target.parentElement
+        } else {
+            item = item.target
         }
+        let purchaseItem = item.parentElement.parentElement
 
-        if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
-            item.target.querySelector('#pencilIcon').style.display = 'inline'
-            item.target.querySelector('#cancelIcon').style.display = 'none'
+        if (inDeleteMode && itemInDeleteMode === purchaseItem.id) {
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[2].style.display = 'none'
 
-            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
-            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
-            setPurchaseIdInDeleteMode('')
-            setDeleteMode(false)
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[1].style.display = 'none'
+
+            itemInDeleteMode = ''
+            inDeleteMode = false
             return
-        } else if (deleteMode) {
-            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
+        } else if (inDeleteMode) {
+            let previousItem = document.getElementById(itemInDeleteMode)
 
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            document.getElementById(previousItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(previousItem.id).children[5].firstChild.children[2].style.display = 'none'
 
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
-            setPurchaseIdInDeleteMode('')
-            setDeleteMode(false)
+            document.getElementById(previousItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(previousItem.id).children[6].firstChild.children[1].style.display = 'none'
+            itemInDeleteMode = ''
+            inDeleteMode = false
         }
 
-        if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
+        if (inEditMode && itemInEditMode === purchaseItem.id) {
             console.log("DONE WITH EDIT")
 
-            item.target.querySelector('#pencilIcon').style.display = 'inline'
-            item.target.querySelector('#checkIcon').style.display = 'none'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[1].style.display = 'none'
 
-            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
-            item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
-            setPurchaseIdInEditMode('')
-            setEditMode(false)
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[2].style.display = 'none'
+
+            purchaseItem.children[1].style.display = 'table-cell'
+            purchaseItem.children[2].style.display = 'table-cell'
+            purchaseItem.children[3].style.display = 'none'
+            purchaseItem.children[4].style.display = 'none'
+
+            itemInEditMode = ''
+            inEditMode = false
             return
-        } else if (editMode) {
-            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+        } else if (inEditMode) {
+            let previousItem = document.getElementById(itemInEditMode)
 
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+            document.getElementById(previousItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(previousItem.id).children[5].firstChild.children[1].style.display = 'none'
 
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItem').querySelector('#trashIcon').style.display = 'inline'
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            document.getElementById(previousItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(previousItem.id).children[6].firstChild.children[2].style.display = 'none'
+
+            previousItem.children[1].style.display = 'table-cell'
+            previousItem.children[2].style.display = 'table-cell'
+            previousItem.children[3].style.display = 'none'
+            previousItem.children[4].style.display = 'none'
+
+            itemInEditMode = ''
+            inEditMode = false
         }
 
-        item.target.querySelector('#pencilIcon').style.display = 'none'
-        item.target.querySelector('#checkIcon').style.display = 'inline'
+        document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'none'
+        document.getElementById(purchaseItem.id).children[5].firstChild.children[1].style.display = 'inline'
 
-        item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'none'
-        item.target.parentElement.parentElement.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+        document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'none'
+        document.getElementById(purchaseItem.id).children[6].firstChild.children[2].style.display = 'inline'
 
-        setPurchaseIdInEditMode(item.target.parentElement.parentElement.id)
-        setEditMode(true);
+        purchaseItem.children[1].style.display = 'none'
+        purchaseItem.children[2].style.display = 'none'
+        purchaseItem.children[3].style.display = 'table-cell'
+        purchaseItem.children[4].style.display = 'table-cell'
+
+        itemInEditMode = purchaseItem.id
+        inEditMode = true
     }
 
     const onDeletePurchaseButtonClick = (item) => {
         if (item.target.id !== 'deletePurchaseItemButton') {
-            item.target = item.target.parentElement
+            item = item.target.parentElement
+        } else {
+            item = item.target
         }
+        let purchaseItem = item.parentElement.parentElement
 
-        if (editMode && purchaseIdInEditMode === item.target.parentElement.parentElement.id) {
-            item.target.querySelector('#trashIcon').style.display = 'inline'
-            item.target.querySelector('#cancelIcon').style.display = 'none'
+        if (inEditMode && itemInEditMode === purchaseItem.id) {
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[1].style.display = 'none'
 
-            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
-            setPurchaseIdInEditMode('')
-            setEditMode(false)
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[2].style.display = 'none'
+
+            purchaseItem.children[1].style.display = 'table-cell'
+            purchaseItem.children[2].style.display = 'table-cell'
+            purchaseItem.children[3].style.display = 'none'
+            purchaseItem.children[4].style.display = 'none'
+
+            itemInEditMode = ''
+            inEditMode = false
             return
-        } else if (editMode) {
-            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInEditMode)
+        } else if (inEditMode) {
+            let previousItem = document.getElementById(itemInEditMode)
 
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            previousItem.children[5].firstChild.children[0].style.display = 'inline'
+            previousItem.children[5].firstChild.children[1].style.display = 'none'
 
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
-            setPurchaseIdInEditMode('')
-            setEditMode(false)
+            previousItem.children[6].firstChild.children[0].style.display = 'inline'
+            previousItem.children[6].firstChild.children[2].style.display = 'none'
+
+            previousItem.children[1].style.display = 'table-cell'
+            previousItem.children[2].style.display = 'table-cell'
+            previousItem.children[3].style.display = 'none'
+            previousItem.children[4].style.display = 'none'
+
+            itemInEditMode = ''
+            inEditMode = false
         }
 
-        if (deleteMode && purchaseIdInDeleteMode === item.target.parentElement.parentElement.id) {
+        if (inDeleteMode && itemInDeleteMode === purchaseItem.id) {
             console.log("DONE WITH DELETION")
 
-            item.target.querySelector('#trashIcon').style.display = 'inline'
-            item.target.querySelector('#checkIcon').style.display = 'none'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[5].firstChild.children[2].style.display = 'none'
 
-            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
-            setPurchaseIdInDeleteMode('')
-            setDeleteMode(false)
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'inline'
+            document.getElementById(purchaseItem.id).children[6].firstChild.children[1].style.display = 'none'
+
+            itemInDeleteMode = ''
+            inDeleteMode = false
             return
-        } else if (deleteMode) {
-            let previousItem = item.target.parentElement.parentElement.parentElement.querySelector('#' + purchaseIdInDeleteMode)
-            
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#trashIcon').style.display = 'inline'
-            previousItem.querySelector('#deletePurchaseItem').querySelector('#deletePurchaseItemButton').querySelector('#checkIcon').style.display = 'none'
+        } else if (inDeleteMode) {
+            let previousItem = document.getElementById(itemInDeleteMode)
 
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'inline'
-            previousItem.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'none'
+            previousItem.children[5].firstChild.children[0].style.display = 'inline'
+            previousItem.children[5].firstChild.children[2].style.display = 'none'
+
+            previousItem.children[6].firstChild.children[0].style.display = 'inline'
+            previousItem.children[6].firstChild.children[1].style.display = 'none'
+
+            itemInDeleteMode = ''
+            inDeleteMode = false
         }
 
-        item.target.querySelector('#trashIcon').style.display = 'none'
-        item.target.querySelector('#checkIcon').style.display = 'inline'
+        document.getElementById(purchaseItem.id).children[5].firstChild.children[0].style.display = 'none'
+        document.getElementById(purchaseItem.id).children[5].firstChild.children[2].style.display = 'inline'
 
-        item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#pencilIcon').style.display = 'none'
-        item.target.parentElement.parentElement.querySelector('#editPurchaseItem').querySelector('#editPurchaseItemButton').querySelector('#cancelIcon').style.display = 'inline'
+        document.getElementById(purchaseItem.id).children[6].firstChild.children[0].style.display = 'none'
+        document.getElementById(purchaseItem.id).children[6].firstChild.children[1].style.display = 'inline'
 
-        setPurchaseIdInDeleteMode(item.target.parentElement.parentElement.id)
-        setDeleteMode(true);
+        itemInDeleteMode = purchaseItem.id
+        inDeleteMode = true
+    }
+
+    const createOptionItem = (item) => {        
+        let optionItem = document.createElement('option')
+        optionItem.value = item.name
+        optionItem.id = item._id
+        optionItem.className = 'trackerListItem'
+        optionItem.innerHTML = item.name
+        document.getElementById('limitTrackerSelector').appendChild(optionItem)
+
+        document.getElementById('currentPeriodMoneyLimit').innerHTML = '$' + item.limit
+        document.getElementById('currentPeriodTimeLimit').innerHTML = item.period + ' ' + (item.period === 1 ? 'day' : 'days') 
+        
+        let startDate = item.startDate
+        let endDate = new Date(startDate)
+        endDate.setDate(endDate.getDate() + (item.period - 1))
+        let currentDate = new Date()
+        let timeLeft = endDate - currentDate
+        // console.log("TIMES")
+        // console.log(endDate)
+        // console.log(currentDate)
+        // console.log(timeLeft)
+        // console.log('TIME LEFT')
+        let days = Math.trunc(timeLeft / 86400000)
+        timeLeft %= 86400000
+        let hours = Math.trunc(timeLeft / 3600000)
+        timeLeft %= 3600000
+        let minutes = Math.trunc(timeLeft / 60000)
+        timeLeft %= 60000
+        let seconds = Math.trunc(timeLeft / 1000)
+        timeLeft %= 1000
+        // console.log(days + ' : ' + hours + ' : ' + minutes + ' : ' + seconds + ' : ' + timeLeft)
+        // console.log((days * 86400000) + (hours * 3600000) + (minutes * 60000) + (seconds * 1000) + timeLeft)
+        document.getElementById('timeLeft').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds + ':' + timeLeft
+    }
+
+    const createPurchaseItem = (item) => {
+
+        let purchaseItem = document.createElement('tr')
+        purchaseItem.className = 'purchaseItem'
+        purchaseItem.id = item._id
+
+        let dateOfPurchaseCell = document.createElement('td')
+        dateOfPurchaseCell.className = 'purchaseItemCell dateOfPurchase'
+        dateOfPurchaseCell.innerHTML = item.date.substring(0, item.date.length - 4) + item.date.substring(item.date.length - 2)
+
+        let purchaseReasonCell = document.createElement('td')
+        purchaseReasonCell.className = 'purchaseItemCell purchaseReason purchaseViewMode'
+        purchaseReasonCell.innerHTML = item.reason
+
+        let amountSpentCell = document.createElement('td')
+        amountSpentCell.className = 'purchaseItemCell moneySpentOnPurchase purchaseViewMode'
+        amountSpentCell.innerHTML = '$' + item.amount
+
+        let purchaseReasonCellEdit = document.createElement('td')
+        purchaseReasonCellEdit.className = 'purchaseItemCell purchaseReason purchaseEditMode'
+        let reasonEditInput = document.createElement('input')
+        reasonEditInput.type = 'text'
+        reasonEditInput.className = 'editInput'
+        reasonEditInput.value = item.reason
+        purchaseReasonCellEdit.appendChild(reasonEditInput)
+        
+        let amountSpentCellEdit = document.createElement('td')
+        amountSpentCellEdit.className = 'purchaseItemCell moneySpentOnPurchase purchaseEditMode'
+        let amountEditInput = document.createElement('input')
+        amountEditInput.type = 'text'
+        amountEditInput.className = 'editInput'
+        amountEditInput.value = item.amount
+        amountSpentCellEdit.appendChild(amountEditInput)
+
+        let editPurchaseItemCell = document.createElement('td')
+        editPurchaseItemCell.className = 'purchaseItemCell editPurchaseItem'
+        editPurchaseItemCell.id = 'editPurchaseItem'
+        let editPurchaseItemButton = document.createElement('button')
+        editPurchaseItemButton.className = 'editPurchaseItemButton'
+        editPurchaseItemButton.id = 'editPurchaseItemButton'
+        editPurchaseItemButton.title = 'edit'
+        editPurchaseItemButton.onclick = onEditPurchaseButtonClick
+        let pencilIcon = document.createElement('i')
+        pencilIcon.className = 'fa-solid fa-pencil pencilIcon'
+        pencilIcon.id = 'pencilIcon'
+        let checkIcon = document.createElement('i')
+        checkIcon.className = 'fa-solid fa-check checkIcon' 
+        checkIcon.id = 'checkIcon'
+        let cancelIcon = document.createElement('i')
+        cancelIcon.className = 'fa-solid fa-xmark cancelIcon' 
+        cancelIcon.id = 'cancelIcon'
+        editPurchaseItemButton.appendChild(pencilIcon)
+        editPurchaseItemButton.appendChild(checkIcon)
+        editPurchaseItemButton.appendChild(cancelIcon)
+        editPurchaseItemCell.appendChild(editPurchaseItemButton)
+
+        let deletePurchaseItemCell = document.createElement('td')
+        deletePurchaseItemCell.className = 'purchaseItemCell deletePurchaseItem'
+        deletePurchaseItemCell.id = 'deletePurchaseItem'
+        let deletePurchaseItemButton = document.createElement('button')
+        deletePurchaseItemButton.className = 'editPurchaseItemButton'
+        deletePurchaseItemButton.id = 'deletePurchaseItemButton'
+        deletePurchaseItemButton.title = 'delete'
+        deletePurchaseItemButton.onclick = onDeletePurchaseButtonClick
+        let trashIcon = document.createElement('i')
+        trashIcon.className = 'fa-solid fa-trash trashIcon'
+        trashIcon.id = 'trashIcon'
+        let checkIcon2 = document.createElement('i')
+        checkIcon2.className = 'fa-solid fa-check checkIcon' 
+        checkIcon2.id = 'checkIcon'
+        let cancelIcon2 = document.createElement('i')
+        cancelIcon2.className = 'fa-solid fa-xmark cancelIcon' 
+        cancelIcon2.id = 'cancelIcon'
+        deletePurchaseItemButton.appendChild(trashIcon)
+        deletePurchaseItemButton.appendChild(checkIcon2)
+        deletePurchaseItemButton.appendChild(cancelIcon2)
+        deletePurchaseItemCell.appendChild(deletePurchaseItemButton)
+
+        purchaseItem.appendChild(dateOfPurchaseCell)
+        purchaseItem.appendChild(purchaseReasonCell)
+        purchaseItem.appendChild(amountSpentCell)
+        purchaseItem.appendChild(purchaseReasonCellEdit)
+        purchaseItem.appendChild(amountSpentCellEdit)
+        purchaseItem.appendChild(editPurchaseItemCell)
+        purchaseItem.appendChild(deletePurchaseItemCell)
+
+        document.getElementById('currentPeriodPurchasesList').appendChild(purchaseItem)
+    }
+
+    const countdownTimer = () => {
+
     }
 
     useEffect(() => {
         if (!props.loggedIn) {
             navigate('/login', props)
+        }
+
+        if (!loaded) {
+            fetch('/trackers/userSpecificTrackers/' + props.userId)
+            .then(res => res.json())
+            .then(res => {
+                if (res.error) {
+                    console.log("NO TRACKERS")
+                    return
+                }
+
+                res.forEach(item => createOptionItem(item))
+
+                fetch('/purchase/trackerSpecificPurchases/' + res[0]._id)
+                .then(res2 => res2.json())
+                .then(res2 => {
+                    res2.forEach(item => createPurchaseItem(item))
+                })
+                .then(() => {
+                    console.log("DONE")
+                    setLoaded(true)
+                })
+            })
         }
     })
 
@@ -174,7 +508,7 @@ export const Home = (props) => {
                 <div className="bodyWrapper">
                     <div className="trackItemsContainer">
                         <select name="Limit Tracker" id="limitTrackerSelector" className="limitTrackerSelector">
-                            <option value="Tracker1" className='trackerListItem'>Tracker #1</option>
+                            {/* <option value="Tracker1" className='trackerListItem'>Tracker #1</option> */}
                         </select>
                         {/* <div className="limitTrackerTimePeriodHistoryContainer"> */}
                             <button className="limitTrackerTimePeriodHistoryButton" onClick={ onLimitTrackerTimePeriodHistoryButtonClick }><i class="fa-solid fa-clock-rotate-left buttons" /></button>
@@ -187,16 +521,16 @@ export const Home = (props) => {
                     <div className="currentPeriodLimitStatisticsContainer">
                         <div className="moneyLimitContainer">
                             <span className="limitText">Limit:</span>
-                            <span className="currentPeriodMoneyLimit">$150</span>
+                            <span className="currentPeriodMoneyLimit" id='currentPeriodMoneyLimit'>$150</span>
                         </div>
                         <div className="timeLimitContainer">
                             <span className="limitText">Period:</span>
-                            <span className="currentPeriodTimeLimit">2 weeks</span>
+                            <span className="currentPeriodTimeLimit" id='currentPeriodTimeLimit'>2 weeks</span>
                         </div>
                     </div>
 
                     <div className="currentPeriodPurchasesListContainer" id='currentPeriodPurchasesListContainer'>
-                        <table className="currentPeriodPurchasesList">
+                        <table className="currentPeriodPurchasesList" id='currentPeriodPurchasesList'>
                             <tr className="currentPurchasesListHeader">
                                 <th className="listHeader dateOfPurchaseTitle">Date</th>
                                 <th className="listHeader purchaseReasonTitle">Reason</th>
@@ -204,7 +538,7 @@ export const Home = (props) => {
                                 {/* <th className="listHeader editPurchaseItemTitle">
                                 </th> */}
                             </tr>
-                            <tr className="purchaseItem" id='item1'>
+                            {/* <tr className="purchaseItem" id='item1'>
                                 <td className="purchaseItemCell dateOfPurchase">5/1/24</td>
                                 <td className="purchaseItemCell purchaseReason purchaseViewMode">Pizza Hut</td>
                                 <td className="purchaseItemCell moneySpentOnPurchase purchaseViewMode">$24.50</td>
@@ -253,7 +587,7 @@ export const Home = (props) => {
                                         <i class='fa-solid fa-xmark' id='cancelIcon'/>
                                     </button>
                                 </td>
-                            </tr>
+                            </tr> */}
                         </table>
                     </div>
 
@@ -264,7 +598,7 @@ export const Home = (props) => {
                         </div>
                         <div className="timeLeftInPeriodContainer">
                             <span className="leftText">Time Left:</span>
-                            <span className="timeLeft">2:14:5:3</span>
+                            <span className="timeLeft" id='timeLeft'>2:14:5:3</span>
                         </div>
                         <div className="totalMoneyLeftContainer">
                             <span className="leftText">Total Left:</span>
