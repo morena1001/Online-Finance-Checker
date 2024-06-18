@@ -13,7 +13,7 @@ export const Home = (props) => {
 
     var dayCount
     var hourCount
-    var MinuteCount
+    var minuteCount
     var secondCount
     var inEditMode = false
     var itemInEditMode
@@ -344,22 +344,58 @@ export const Home = (props) => {
         endDate.setDate(endDate.getDate() + (item.period - 1))
         let currentDate = new Date()
         let timeLeft = endDate - currentDate
-        // console.log("TIMES")
-        // console.log(endDate)
-        // console.log(currentDate)
-        // console.log(timeLeft)
-        // console.log('TIME LEFT')
-        let days = Math.trunc(timeLeft / 86400000)
+
+        dayCount = Math.trunc(timeLeft / 86400000)
         timeLeft %= 86400000
-        let hours = Math.trunc(timeLeft / 3600000)
+        hourCount = Math.trunc(timeLeft / 3600000)
         timeLeft %= 3600000
-        let minutes = Math.trunc(timeLeft / 60000)
+        minuteCount = Math.trunc(timeLeft / 60000)
         timeLeft %= 60000
-        let seconds = Math.trunc(timeLeft / 1000)
+        secondCount = Math.trunc(timeLeft / 1000)
         timeLeft %= 1000
-        // console.log(days + ' : ' + hours + ' : ' + minutes + ' : ' + seconds + ' : ' + timeLeft)
-        // console.log((days * 86400000) + (hours * 3600000) + (minutes * 60000) + (seconds * 1000) + timeLeft)
-        document.getElementById('timeLeft').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds + ':' + timeLeft
+
+        document.getElementById('timeLeft').innerHTML = dayCount + ':' + hourCount + ':' + minuteCount + ':' + secondCount
+        setInterval(countdownTimer, 1000)
+    }
+
+    const countdownTimer = (item) => {
+        secondCount--
+
+        if (dayCount <= 0 && hourCount <= 0 && minuteCount <= 0 && secondCount <= 0) {            
+            let startDate = item.startDate
+            let endDate = new Date(startDate)
+            endDate.setDate(endDate.getDate() + (item.period - 1))
+            let currentDate = new Date()
+            let timeLeft = endDate - currentDate
+
+            dayCount = Math.trunc(timeLeft / 86400000)
+            timeLeft %= 86400000
+            hourCount = Math.trunc(timeLeft / 3600000)
+            timeLeft %= 3600000
+            minuteCount = Math.trunc(timeLeft / 60000)
+            timeLeft %= 60000
+            secondCount = Math.trunc(timeLeft / 1000)
+            timeLeft %= 1000
+            document.getElementById('timeLeft').innerHTML = dayCount + ':' + hourCount + ':' + minuteCount + ':' + secondCount
+            return
+        }
+        
+        if (secondCount < 0 && (dayCount > 0 || hourCount > 0 || minuteCount > 0)) {
+            minuteCount--   
+            secondCount = 59
+        }
+
+        if (minuteCount < 0 && (dayCount > 0 || hourCount > 0)) {
+            hourCount--
+            minuteCount = 59
+        }
+
+        if (hourCount < 0 && dayCount > 0) {
+            dayCount = 0
+            hourCount = 23
+        }
+
+        document.getElementById('timeLeft').innerHTML = dayCount + ':' + hourCount + ':' + minuteCount + ':' + secondCount
     }
 
     const createPurchaseItem = (item) => {
@@ -449,10 +485,6 @@ export const Home = (props) => {
         purchaseItem.appendChild(deletePurchaseItemCell)
 
         document.getElementById('currentPeriodPurchasesList').appendChild(purchaseItem)
-    }
-
-    const countdownTimer = () => {
-
     }
 
     useEffect(() => {
